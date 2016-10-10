@@ -10,3 +10,10 @@ This script installs:
 - PHP5 (with mysql, curl and gd support)
 - MySQL
 - Wordpress
+
+
+Non wordpress clean mysql 
+
+sudo apt-get remove --purge mysql-server mysql-client mysql-common
+sudo apt-get autoremove
+sudo apt-get autoclean
