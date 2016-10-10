@@ -3,7 +3,7 @@ _Estimated time: 1 minute_
 
 ### Install
 Copy and run this script:  
-```git clone http://github.com/erming/ubuntu-wp-install && bash ubuntu-wp-install/install.sh```
+```git clone http://github.com/arsanto/ubuntu-blog-install.git && bash ubuntu-blog-install/install.sh```
 
 This script installs:
 - NGINX
