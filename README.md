@@ -15,5 +15,7 @@ This script installs:
 Non wordpress clean mysql 
 
 sudo apt-get remove --purge mysql-server mysql-client mysql-common
+
 sudo apt-get autoremove
+
 sudo apt-get autoclean
