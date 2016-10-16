@@ -7,6 +7,7 @@ Copy and run this script:
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/phpmyadmin && chmod +x phpmyadmin && ./phpmyadmin
 
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/LAMP && chmod +x LAMP && ./LAMP
 This script installs:
 - NGINX
 - PHP5 (with mysql, curl and gd support)
