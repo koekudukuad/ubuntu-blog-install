@@ -5,7 +5,7 @@ _Estimated time: 1 minute_
 Copy and run this script:  
 ```git clone http://github.com/arsanto/ubuntu-blog-install.git && bash ubuntu-blog-install/install.sh```
 
-wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/phpmyadmin && chmod +x phpmyadmin && ./phpmyadmin
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/phpmyadmin && chmod +x phpmyadmin && ./phpmyadmin
 
 This script installs:
 - NGINX
