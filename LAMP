@@ -59,7 +59,8 @@ cd /var/www/html
 
 chown -R :www-data *
 
-
+sudo php5enmod mcrypt
+sudo service apache2 restart
 
 
 
