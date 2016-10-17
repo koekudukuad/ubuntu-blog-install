@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 pwd=`dirname $0`
 
 read -e -p "Target directory: " -i "/var/www" dir
