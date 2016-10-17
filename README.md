@@ -1,6 +1,10 @@
 This bash script will install Wordpress on your Ubuntu machine.  
 _Estimated time: 1 minute_ 
 
+apt-get install git -y
+apt-get install ca-certificates -y
+
+
 ### Install
 Copy and run this script:  
 
