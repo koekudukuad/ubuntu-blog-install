@@ -1,5 +1,4 @@
 #!/bin/bash
-
 pwd=`dirname $0`
 
 read -e -p "Target directory: " -i "/var/www" dir
@@ -28,7 +27,7 @@ sudo service php5-fpm restart
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $db;"
 
 cd $dir
-sudo wget --no-check-certificate' http://wordpress.org/latest.zip
+sudo wget http://wordpress.org/latest.zip
 sudo unzip latest.zip > /dev/null
 
 sudo rm -rf wp-*/
