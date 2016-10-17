@@ -5,7 +5,7 @@ DEBIAN_FRONTEND=noninteractive apt-get remove --purge -y -o Dpkg::Options::="--f
 
 apt-get update
 
-apt-get install apache2 php5 php5-cli libapache2-mod-php5 php5-gd php5-mcrypt php5-curl unzip php5-sqlite nano wget mysql-server -y
+apt-get install apache2 php5 php5-cli libapache2-mod-php5 php5-gd php5-mysql php5-mcrypt php5-curl unzip php5-sqlite nano wget mysql-server -y
 
 
 echo "<IfModule mod_dir.c>
