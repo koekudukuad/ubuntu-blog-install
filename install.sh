@@ -12,6 +12,7 @@ if [ ! -d "$dir" ]; then
 fi
 
 sudo apt-get install -y \
+	mariadb-server mariadb-client \
 	nginx \
 	php7.0-curl \
 	php7.0-fpm \
