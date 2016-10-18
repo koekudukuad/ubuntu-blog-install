@@ -12,7 +12,6 @@ if [ ! -d "$dir" ]; then
 fi
 
 sudo apt-get install -y \
-	mysql-server \
 	nginx \
 	php7.0-curl \
 	php7.0-fpm \
