@@ -17,7 +17,7 @@ echo "
  ${b}${C}# Nginx - MySQL - PHP - phpMyAdmin #${R}
 
  Example:${G} sudo bash lemp16.4.sh ${G}-p${R} ${E}MyPassword123@!-${R}
- ${C}Default:${R}${G} sudo bash lemp16.4.sh${R}${C} | Pssword:testT900${R}"
+ ${C}Default:${R}${G} sudo bash lemp16.4.sh${R}${C} | Pssword:test12345${R}"
 }
 
 while [ "$1" != "" ]; do
