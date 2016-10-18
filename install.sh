@@ -14,15 +14,15 @@ fi
 sudo apt-get install -y \
 	mysql-server \
 	nginx \
-	php5-curl \
-	php5-fpm \
-	php5-gd \
-	php5-mysql \
+	php5.6-curl \
+	php5.6-fpm \
+	php5.6-gd \
+	php5.6-mysql \
 	wget \
 	unzip
 
-sudo replace "2M" "10M" -- /etc/php5/fpm/php.ini
-sudo service php5-fpm restart
+sudo replace "2M" "10M" -- /etc/php/5.6/fpm/php.ini
+sudo service php5.6-fpm restart
 
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $db;"
 
