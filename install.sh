@@ -21,7 +21,7 @@ sudo apt-get install -y \
 	wget \
 	unzip
 
-sudo replace "2M" "10M" -- /etc/php7.0/fpm/php.ini
+sudo replace "2M" "10M" -- /etc/php/7.0/fpm/php.ini
 sudo service php7.0-fpm restart
 
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $db;"
