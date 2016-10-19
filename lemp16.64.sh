@@ -51,7 +51,7 @@ sudo apt-get install curl -y > /dev/null 2>&1
 sudo apt-get install expect -y > /dev/null 2>&1
 if [ -z "$pass" ]
 then
-  pass="testT900"
+  pass="test12345"
 fi
 ip=`curl -s https://api.ipify.org`
 # Clear
