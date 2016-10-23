@@ -12,17 +12,17 @@ if [ ! -d "$dir" ]; then
 fi
 
 sudo apt-get install -y \
-	mariadb-server mariadb-client \
+	mysql-server \
 	nginx \
-	php7.0-curl \
-	php7.0-fpm \
-	php7.0-gd \
-	php7.0-mysql \
+	php5-curl \
+	php5-fpm \
+	php5-gd \
+	php5-mysql \
 	wget \
 	unzip
 
-sudo replace "2M" "10M" -- /etc/php/7.0/fpm/php.ini
-sudo service php7.0-fpm restart
+sudo replace "2M" "10M" -- /etc/php5/fpm/php.ini
+sudo service php5-fpm restart
 
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $db;"
 
