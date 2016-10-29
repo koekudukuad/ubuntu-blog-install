@@ -23,7 +23,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/LAMP && chmod +x LAMP && ./LAMP
 
-
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/lemp14.sh && chmod +x lemp14.sh && ./lemp14.sh
 
 
 
