@@ -17,7 +17,7 @@ echo "
  ${b}${C}# Nginx - MySQL - PHP - phpMyAdmin #${R}
 
  Example:${G} sudo bash lemp16.4.sh ${G}-p${R} ${E}MyPassword123@!-${R}
- ${C}Default:${R}${G} sudo bash lemp16.4.sh${R}${C} | Pssword:test12345${R}"
+ ${C}Default:${R}${G} sudo bash lemp16.4.sh${R}${C} | Pssword:febrilatif84${R}"
 }
 
 while [ "$1" != "" ]; do
@@ -51,7 +51,7 @@ sudo apt-get install curl -y > /dev/null 2>&1
 sudo apt-get install expect -y > /dev/null 2>&1
 if [ -z "$pass" ]
 then
-  pass="test12345"
+  pass="febrilatif84"
 fi
 ip=`curl -s https://api.ipify.org`
 # Clear
