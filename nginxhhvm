@@ -110,26 +110,7 @@ server {
 EOF
 sudo service nginx reload
 
-# Getting Wordpress
-cd /var/www/html/
-wget wordpress.org/latest.zip
-unzip latest.zip
-cd /var/www/html/
-mv wordpress/* .
-rm -rf wordpress/
-find . -type d -exec chown www-data:www-data {} \;
-find . -type f -exec chown www-data:www-data {} \;
-mysql -u root -pfebrilatif84
-create database databasename;
-create user username@localhost;
-set password for username@localhost = password("febrilatif84");
-grant all privileges on databasename.* to username@localhost identified by 'febrilatif84';
-flush privileges;
-exit;
-
-# Edit WP-Config & enter DB Info
-cp wp-config-sample.php wp-config.php
-sudo nano wp-config.php 
+mkdir /var/www/public
 
 echo "=============================="
 echo "= Script Complete         ="
