@@ -119,11 +119,11 @@ mv wordpress/* .
 rm -rf wordpress/
 find . -type d -exec chown www-data:www-data {} \;
 find . -type f -exec chown www-data:www-data {} \;
-mysql -u root -p354480
+mysql -u root -pfebrilatif84
 create database databasename;
 create user username@localhost;
-set password for username@localhost = password("yourpasswordhere");
-grant all privileges on databasename.* to username@localhost identified by 'yourpasswordhere';
+set password for username@localhost = password("febrilatif84");
+grant all privileges on databasename.* to username@localhost identified by 'febrilatif84';
 flush privileges;
 exit;
 
