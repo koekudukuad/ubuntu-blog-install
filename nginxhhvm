@@ -65,11 +65,7 @@ sudo update-rc.d hhvm defaults
 sudo /usr/bin/update-alternatives --install /usr/bin/php php /usr/bin/hhvm 60
 sudo service hhvm restart
 
-# PHP TEST
-touch test.php
-echo " test.php
-hhvm test.php
-php -v
+
 
 # Nginx Config
 echo -e "${COLOR_COMMENT}"
