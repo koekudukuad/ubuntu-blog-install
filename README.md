@@ -1,3 +1,12 @@
+php5 fpm easting cpu
+setting di 
+
+/etc/php5/fpm/pool.d
+pm = ondemand
+pm.max_children = 2
+
+
+
 This bash script will install Wordpress on your Ubuntu machine.  
 _Estimated time: 1 minute_ 
 
