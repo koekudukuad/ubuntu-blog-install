@@ -20,6 +20,8 @@ sed -i "s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 sed -i "s/^;listen.owner = www-data/listen.owner = www-data/" /etc/php5/fpm/pool.d/www.conf
 sed -i "s/^;listen.group = www-data/listen.group = www-data/" /etc/php5/fpm/pool.d/www.conf
 sed -i "s/^;listen.mode = 0660/listen.mode = 0660/" /etc/php5/fpm/pool.d/www.conf
+sed -i 's/pm = dynamic/pm = ondemand/' /etc/php5/fpm/pool.d/www.conf
+sed -i 's/pm.max_children = 5/pm.max_children = 2/' /etc/php5/fpm/pool.d/www.conf
 
 
 
