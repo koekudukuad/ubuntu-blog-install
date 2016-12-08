@@ -37,7 +37,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/lemp14.sh && chmod +x lemp14.sh && ./lemp14.sh
 
 
-
+wget --no-check-certificate  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/debian7-32 && chmod +x debian7-32 && ./debian7-32
 
 
 This script installs:
