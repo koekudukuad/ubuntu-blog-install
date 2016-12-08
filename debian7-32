@@ -49,7 +49,7 @@ server {
 
     charset utf-8;
 
-    root /var/www/public;
+    root /usr/share/nginx/www;
     index index.html index.htm index.php;
 	
 		location ~ \.php$ {
