@@ -1,3 +1,5 @@
+nano /etc/apt/sources.list
+cd error
 php5 fpm easting cpu
 setting di 
 
