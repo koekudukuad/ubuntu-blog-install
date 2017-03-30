@@ -19,7 +19,7 @@ clean OS
 sudo apt-get remove mysql-server* apache2* php5* php* mysql* && sudo apt-get autoremove
 
 sudo chown -R www-data:www-data *
-sudo chmod -R 777 *
+
 
 
 ### Install
