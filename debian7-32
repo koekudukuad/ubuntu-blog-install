@@ -208,23 +208,17 @@ server {
 		fastcgi_index index.php;
 		include fastcgi_params;
 		add_header X-Cache \$upstream_cache_status;
+		expires 8d;
 	}
 	
 	
 
-    location ~* \.(?:ico|css|js|gif|jpe?g|png|svg|html|xml|otf|ttf|eot|woff)$ {
+    location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml|mp3|flv)$ {
         expires 7d;
         access_log off;
         add_header Cache-Control public;
     }
 	
-	location ~* \.(?:css|js)$ {
-	  expires 1y;
-	  access_log off;
-	  add_header Cache-Control public;
-	}
-
-
 
     location / {
        try_files \$uri \$uri/ /index.php?\$args;
