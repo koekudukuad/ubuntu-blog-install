@@ -16,26 +16,6 @@ apt-get -y install nginx
 
 apt-get install -y php5-mysql php5-fpm php5-gd php5-cli php5-curl zip unzip sudo
 
-#install zendopcache
-sudo apt-get install -y php-pear
-sudo apt-get install -y build-essential php5-dev
-sudo pecl install zendopcache-7.0.4
-
-cat /dev/null > /etc/php5/mods-available/opcache.ini
-
-cat << EOF | tee -a /etc/php5/mods-available/opcache.ini
-zend_extension=/usr/lib/php5/20121212/opcache.so
-opcache.memory_consumption=128
-opcache.interned_strings_buffer=8
-opcache.max_accelerated_files=4000
-opcache.revalidate_freq=60
-opcache.fast_shutdown=1
-opcache.enable_cli=1
-
-EOF
-
-
-
 #configure phpfpm settings
 sed -i "s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
@@ -51,10 +31,10 @@ listen.owner = www-data
 listen.group = www-data
 listen.mode = 0660
 
-pm = dynamic
-pm.max_children = 9
-pm.start_servers = 3
-pm.min_spare_servers = 2
+pm = ondemand
+pm.max_children = 5
+pm.start_servers = 1
+pm.min_spare_servers = 1
 pm.max_spare_servers = 4
 pm.process_idle_timeout = 10s
 pm.max_requests = 200
