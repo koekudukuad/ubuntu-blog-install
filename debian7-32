@@ -105,11 +105,11 @@ http {
     
 
     client_body_buffer_size 256k;
-    client_body_timeout 50;
+    client_body_timeout 3000;
     client_header_buffer_size 64k;
     client_body_in_file_only off;
     large_client_header_buffers 4 256k;
-    client_header_timeout  15;
+    client_header_timeout  3000;
     ignore_invalid_headers on; 
     client_max_body_size 120m;
     
@@ -120,7 +120,7 @@ http {
     lingering_time 20s;
     lingering_timeout 5s;
     reset_timedout_connection on;
-    send_timeout 50;
+    send_timeout 600;
     
     
     gzip on;
