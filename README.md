@@ -1,13 +1,24 @@
 nano /etc/apt/sources.list
+
 cd error
+
+
 php5 fpm easting cpu
+
+
 setting di 
 
 /etc/php5/fpm/pool.d
 
+
 pm = ondemand
 
+
 pm.max_children = 2
+
+
+
+find /var/log -type f -delete
 
 
 
