@@ -21,6 +21,9 @@ pm.max_children = 2
 find /var/log -type f -delete
 
 
+find /usr/share/nginx/cache/fcgi -type f -delete
+
+
 
 This bash script will install Wordpress on your Ubuntu machine.  
 _Estimated time: 1 minute_ 
