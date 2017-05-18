@@ -23,6 +23,9 @@ find /var/log -type f -delete
 
 find /usr/share/nginx/cache/fcgi -type f -delete
 
+find /var/www/nginx-cache -type f -delete
+
+
 
 
 This bash script will install Wordpress on your Ubuntu machine.  
