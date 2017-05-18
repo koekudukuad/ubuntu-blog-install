@@ -26,3 +26,5 @@
 
 /var/www/nginx-cache
 
+#restart
+ee stack restart
