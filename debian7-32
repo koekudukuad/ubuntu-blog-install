@@ -185,7 +185,7 @@ cat /dev/null > /etc/nginx/sites-available/default
 
 cat << EOF | tee -a /etc/nginx/sites-available/default
 #FASTCGI MICROCACHE - START#
-fastcgi_cache_path /usr/share/nginx/cache/fcgi levels=1:2 keys_zone=microcache:100m max_size=10g inactive=7d;
+fastcgi_cache_path /usr/share/nginx/cache/fcgi levels=1:2 keys_zone=microcache:100m max_size=10g inactive=24h;
 fastcgi_cache_key $scheme$host$request_uri$request_method;
 
 #FASTCGI MICROCACHE - END#
@@ -205,7 +205,7 @@ server {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
             
         fastcgi_cache microcache;
-        fastcgi_cache_valid 200 301 302 7d;
+        fastcgi_cache_valid 200 301 302 24h;
         fastcgi_cache_use_stale updating error timeout invalid_header http_500 http_503 http_404;
         fastcgi_pass_header Set-Cookie;
         fastcgi_pass_header Cookie;
