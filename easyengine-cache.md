@@ -18,8 +18,10 @@
 		fastcgi_index index.php;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 		include fastcgi_params;
-		fastcgi_buffers 16 16k;
-		fastcgi_buffer_size 32k;
+		fastcgi_buffers 32 256k;
+		fastcgi_buffer_size 256k;
+		fastcgi_connect_timeout 300;
+		fastcgi_send_timeout 300;
 		fastcgi_cache_lock on;
 		add_header Pragma public;
 		add_header Cache-Control "public, must-revalidate, proxy-revalidate";
