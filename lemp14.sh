@@ -1,17 +1,17 @@
 #Sets up default LEMP Stack on Ubuntu (14.04x64) with Nginx, MySql 5.5, PHP-FPM 5.5
 #CONFIGURATION
-MYSQLPASS="password"
-MYSQLDATABASE="wordpress"
-SERVERNAMEORIP="example.com"
+#MYSQLPASS="password"
+#MYSQLDATABASE="wordpress"
+#SERVERNAMEORIP="example.com"
 
 #update everything
 apt-get update
 #install php, mysql, nginx
 apt-get -y install nginx
 #you may need to enter a password for mysql-server
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${MYSQLPASS}"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${MYSQLPASS}"
-sudo apt-get -y install mysql-server mysql-client
+#sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${MYSQLPASS}"
+#sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${MYSQLPASS}"
+#sudo apt-get -y install mysql-server mysql-client
 
 apt-get install -y php5-mysql php5-fpm php5-gd php5-cli php5-curl zip unzip
 
@@ -28,6 +28,8 @@ sed -i 's/pm.max_children = 5/pm.max_children = 2/' /etc/php5/fpm/pool.d/www.con
 #configure nginx
 #more advanced configuration options and plugin info available here: https://rtcamp.com/wordpress-nginx/tutorials/single-site/fastcgi-cache-with-purging/
 mkdir /usr/share/nginx/cache
+mkdir /usr/share/nginx/www
+rm -rf /usr/share/nginx/html
 
 sed -i "s/^\tworker_connections 768;/\tworker_connections 1536;/" /etc/nginx/nginx.conf
 
@@ -45,24 +47,4 @@ service nginx restart
 service mysql restart
 service php5-fpm restart
 
-##create MySql Database
-mysql -uroot -p$MYSQLPASS -e "create database ${MYSQLDATABASE}"
-
-
-cd /usr/share/nginx/html
-#get WordPress latest
-wget http://wordpress.org/latest.tar.gz
-tar -xvzf latest.tar.gz
-#move WordPress to web woot
-mv /usr/share/nginx/html/wordpress/* /usr/share/nginx/html/
-
-#cleanup folder
-rm -rf wordpress
-
-#Done! 
-#Go through WordPress install with database and password you setup here
-#You may need to create wp-config.php
-
-#benchmark from loadimpact: http://loadimpact.com/load-test/69.55.49.190-eabaf77a2ff22ab93bb978a8ecf485cb
-
-
+echo '<?php phpinfo();' > /usr/share/nginx/www/index.php
