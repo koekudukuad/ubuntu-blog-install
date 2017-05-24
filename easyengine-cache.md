@@ -4,27 +4,17 @@
 #paste /replace all
 
 
-		fastcgi_cache_path /var/www/nginx-cache levels=1:2 keys_zone=microcache:100m max_size=10g inactive=7d;
-		fastcgi_cache_key $scheme$host$request_uri$request_method;
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		fastcgi_cache microcache;
-  		fastcgi_cache_valid 200 301 302 7d;
-         	fastcgi_cache_use_stale updating error timeout invalid_header http_500 http_503 http_404;
-         	fastcgi_pass_header Set-Cookie;
-           	fastcgi_pass_header Cookie;
-         	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
-		add_header X-Cache $upstream_cache_status;
-          	#fastcgi_pass unix:/var/run/php5-fpm.sock;
-		fastcgi_index index.php;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		include fastcgi_params;
-		fastcgi_buffers 32 256k;
-		fastcgi_buffer_size 256k;
-		fastcgi_connect_timeout 300;
-		fastcgi_send_timeout 300;
-		fastcgi_cache_lock on;
-		add_header Pragma public;
-		add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+	# FastCGI cache settings
+	fastcgi_cache_path /var/run/nginx-cache levels=1:2 keys_zone=WORDPRESS:50m inactive=60m;
+	fastcgi_cache_key "$scheme$request_method$host$request_uri";
+	fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_503;
+	fastcgi_cache_valid 200 301 302 404 1h;
+	fastcgi_buffers 16 16k;
+	fastcgi_buffer_size 32k;
+	fastcgi_param SERVER_NAME $http_host;
+	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+	fastcgi_keep_conn on;
+	fastcgi_cache WORDPRESS;
       		
       
 #buat folder nginx-cache
