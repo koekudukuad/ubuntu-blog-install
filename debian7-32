@@ -171,6 +171,8 @@ EOF
 #configure nginx
 #more advanced configuration options and plugin info available here: https://rtcamp.com/wordpress-nginx/tutorials/single-site/fastcgi-cache-with-purging/
 mkdir /usr/share/nginx/cache
+mkdir /usr/share/nginx/www
+rm -rf mkdir /usr/share/nginx/html
 
 #sed -i "s/^\tworker_connections 768;/\tworker_connections 1536;/" /etc/nginx/nginx.conf
 
@@ -199,7 +201,7 @@ server {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
 		fastcgi_cache  microcache;
 		fastcgi_cache_key \$scheme\$host\$request_uri\$request_method;
-		fastcgi_cache_valid 200 301 302 30s;
+		fastcgi_cache_valid 200 301 302 60s;
 		fastcgi_cache_use_stale updating error timeout invalid_header http_500;
 		fastcgi_pass_header Set-Cookie;
 		fastcgi_pass_header Cookie;
@@ -246,4 +248,10 @@ EOF
 #just restarting to make sure they have latest
 service nginx restart
 service php5-fpm restart
+
+sudo cat > /usr/share/nginx/www/index.php <<END
+<?php
+phpinfo();
+?>
+END
 
