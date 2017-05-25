@@ -42,9 +42,7 @@ sudo chown -R www-data:www-data *
 ### Install
 Copy and run this script:  
 
-wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/lemp16.64.sh && chmod +x lemp16.64.sh && ./lemp16.64.sh
 
-```git clone http://github.com/arsanto/ubuntu-blog-install.git && bash ubuntu-blog-install/install.sh```
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/phpmyadmin && chmod +x phpmyadmin && ./phpmyadmin
 
@@ -53,10 +51,9 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/LAMP && chmod +x LAMP && ./LAMP
 
-wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/lemp14.sh && chmod +x lemp14.sh && ./lemp14.sh
 
 
-wget --no-check-certificate  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/debian7-32 && chmod +x debian7-32 && ./debian7-32
+wget --no-check-certificate  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu14-64 && chmod +x ubuntu14-64 && ./ubuntu14-64
 
 
 This script installs:
