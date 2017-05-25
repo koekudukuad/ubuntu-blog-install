@@ -1,0 +1,224 @@
+#Sets up default LEMP Stack on Ubuntu (14.04x64) with Nginx, MySql 5.5, PHP-FPM 5.5
+#Minimal OS
+
+DEBIAN_FRONTEND=noninteractive apt-get remove --purge -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" apache2 apache2-bin apache2-data apache2-doc apache2-mpm-prefork apache2-utils apt-utils bind9 bind9-host bind9utils binutils bsd-mailx bsdmainutils bzip2 ca-certificates console-common console-data console-setup cracklib-runtime cron db-util db5.3-util debconf-utils dialog expat fetchmail file finger fontconfig fontconfig-config fonts-dejavu fonts-dejavu-core fonts-dejavu-extra fonts-freefont-ttf ftp gettext groff-base info iputils-arping iputils-tracepath isc-dhcp-client isc-dhcp-common kbd keyboard-configuration ldap-utils less libapr1:amd64 libaprutil1:amd64 libaprutil1-dbd-sqlite3:amd64 libaprutil1-ldap:amd64 libapt-inst1.5:amd64 libavahi-client3:amd64 libavahi-common-data:amd64 libavahi-common3:amd64 libbind9-90 libbsd0:amd64 libcrack2:amd64 libcroco3:amd64 libcups2:amd64 libdns100 libfile-copy-recursive-perl libfontconfig1:amd64 libfreetype6:amd64 libgeoip1:amd64 libglib2.0-0:amd64 libgmp10:amd64 libgomp1:amd64 libgssglue1:amd64 libhdb9-heimdal:amd64 libisc95 libisccc90 libisccfg90 libkdc2-heimdal:amd64 libldb1:amd64 liblockfile-bin liblockfile1:amd64 libltdl7:amd64 liblwres90 libmagic1:amd64 libntdb1:amd64 libodbc1:amd64 libpaper1:amd64 libpcap0.8:amd64 libperl5.18 libpipeline1:amd64 libpopt0:amd64 libpython-stdlib:amd64 libsensors4:amd64 libsnmp-base libsnmp30:amd64 libtalloc2:amd64 libtdb1:amd64 libtevent0:amd64 libtirpc1:amd64 libunistring0:amd64 libwbclient0:amd64 libxml2:amd64 logrotate lynx lynx-cur m4 make man-db manpages memtester mlocate mtools ncurses-term odbcinst odbcinst1debian2:amd64 openssl openssl-blacklist postfix procmail psutils pwgen python python-crypto python-dnspython python-ldb python-minimal python-ntdb python-talloc python-tdb python2.7 python2.7-minimal rpcbind rsync sasl2-bin screen sharutils snmp ssl-cert sudo syslinux syslinux-common tcpdump tcsh tdb-tools telnet tofrodos traceroute ttf-dejavu ttf-dejavu-core ttf-dejavu-extra ttf-freefont unixodbc unzip update-inetd uuid-runtime whois wide-dhcpv6-client xinetd xkb-data; apt-get clean
+
+
+
+#update everything
+apt-get update
+#install php, mysql, nginx
+apt-get -y install nginx
+
+
+
+apt-get install -y php5-mysql php5-fpm php5-gd php5-cli php5-curl zip unzip sudo
+
+#configure phpfpm settings
+sed -i "s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
+
+cat /dev/null > /etc/php5/fpm/pool.d/www.conf
+
+cat << EOF | tee -a /etc/php5/fpm/pool.d/www.conf
+[www]
+user = www-data
+group = www-data
+listen = /var/run/php5-fpm.sock
+listen.allowed_clients = 127.0.0.1
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0660
+
+pm = ondemand
+pm.max_children = 50
+pm.start_servers = 20
+pm.min_spare_servers = 5
+pm.max_spare_servers = 35
+pm.process_idle_timeout = 10s
+pm.max_requests = 500
+chdir = /
+pm.status_path = /php_status
+request_terminate_timeout = 300s
+listen.backlog = 65535
+rlimit_files = 131072
+rlimit_core = unlimited
+catch_workers_output = yes
+env[HOSTNAME] = $HOSTNAME
+env[TMP] = /tmp
+env[TMPDIR] = /tmp
+env[TEMP] = /tmp
+EOF
+
+
+cat /dev/null > /etc/nginx/nginx.conf
+
+cat << EOF | tee -a /etc/nginx/nginx.conf
+user  www-data;
+worker_processes  1;
+#worker_priority -10;
+worker_rlimit_nofile 100000;
+
+
+error_log  /var/log/nginx/error.log crit;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  35000;
+    use epoll;
+    #accept_mutex on;
+    #accept_mutex_delay 200ms;
+    multi_accept on;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    log_format  main  '\$remote_addr - \$remote_user [\$time_local] "\$request" '
+                      '\$status \$body_bytes_sent "\$http_referer" '
+                      '"\$http_user_agent" "\$http_x_forwarded_for"';
+
+
+    access_log  off;
+    sendfile on;
+    sendfile_max_chunk 512k;
+    tcp_nopush on;
+    tcp_nodelay on;
+    types_hash_max_size 2048;
+    server_tokens off;
+    server_name_in_redirect off;
+    server_names_hash_bucket_size 128;
+    open_file_cache max=130000 inactive=20s;
+    open_file_cache_valid 30s;
+    open_file_cache_min_uses 2;
+    open_file_cache_errors off;
+    open_log_file_cache max=10000 inactive=30s min_uses=2;
+    output_buffers   8 256k;
+    postpone_output  1460;
+    request_pool_size  32k;    
+    connection_pool_size  512;
+    directio 4m;
+    
+    proxy_connect_timeout  600s;
+    proxy_send_timeout  600s;
+    proxy_read_timeout  600s;
+    fastcgi_send_timeout 600s;
+    fastcgi_read_timeout 600s;
+
+    client_body_buffer_size 256k;
+    client_body_timeout 3000;
+    client_header_buffer_size 64k;
+    client_body_in_file_only off;
+    large_client_header_buffers 4 256k;
+    client_header_timeout  3000;
+    ignore_invalid_headers on; 
+    client_max_body_size 120m;
+    
+    
+    keepalive_timeout 20;
+    keepalive_requests 1000;
+    keepalive_disable msie6;
+    lingering_time 20s;
+    lingering_timeout 5s;
+    reset_timedout_connection on;
+    send_timeout 600;
+    
+    
+    gzip on;
+    gzip_static on;
+    gzip_disable "msie6";
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 5;
+    gzip_buffers 32 8k;
+    gzip_min_length 1024;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+	
+    
+
+  # Cloudflare module cho nginx
+    set_real_ip_from   204.93.240.0/24;
+    set_real_ip_from   204.93.177.0/24;
+    set_real_ip_from   199.27.128.0/21;
+    set_real_ip_from   173.245.48.0/20;
+    set_real_ip_from   103.21.244.0/22;
+    set_real_ip_from   103.22.200.0/22;
+    set_real_ip_from   103.31.4.0/22;
+    set_real_ip_from   141.101.64.0/18;
+    set_real_ip_from   108.162.192.0/18;
+    set_real_ip_from   190.93.240.0/20;
+    set_real_ip_from   188.114.96.0/20;  
+    set_real_ip_from   197.234.240.0/22;
+    set_real_ip_from   198.41.128.0/17;
+    real_ip_header     CF-Connecting-IP;
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}
+EOF
+
+
+
+
+
+
+
+
+
+
+
+
+#configure nginx
+#more advanced configuration options and plugin info available here: https://rtcamp.com/wordpress-nginx/tutorials/single-site/fastcgi-cache-with-purging/
+mkdir /usr/share/nginx/cache
+mkdir /usr/share/nginx/www
+rm -rf mkdir /usr/share/nginx/html
+
+
+
+cat /dev/null > /etc/nginx/sites-available/default
+
+cat << EOF | tee -a /etc/nginx/sites-available/default
+server {
+	listen 80;
+	server_name _;
+	root /usr/share/nginx/www;
+	index index.php;
+	location / {
+		try_files \$uri \$uri/ /index.php?\$args;
+	}
+	location /xmlrpc.php {
+		deny all;
+	}
+	location ~ \.php$ {
+		try_files $uri =404;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+	
+	rewrite ^/category$ /index.php?pagetype=1 last;
+	rewrite "^/items/([0-9]+)_([a-zA-Z0-9]{5})/([a-zA-Z0-9-_]+)\.html$" /single.php?id=$1&token=$2&title=$3 last;
+	rewrite ^/search/([a-zA-Z0-9-_]+)\.html$ /query.php?product=$1 last;
+	rewrite ^/search$ /query.php last;
+
+	
+}
+EOF
+
+
+
+
+
+
+#just restarting to make sure they have latest
+service nginx restart
+service php5-fpm restart
+
+sudo cat > /usr/share/nginx/www/index.php <<END
+<?php
+phpinfo();
+?>
+END
