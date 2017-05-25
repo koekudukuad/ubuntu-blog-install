@@ -32,3 +32,5 @@ sed -i "s/^\tlocation \/ {/\n\tlocation ~ \\\.php$ {\n\t\ttry_files \$uri =404;\
 #just restarting to make sure they have latest
 service nginx restart
 service php5-fpm restart
+
+echo '<?php phpinfo(); ?>' > /usr/share/nginx/www/index.php
