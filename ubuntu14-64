@@ -201,7 +201,7 @@ server {
     root /usr/share/nginx/www;
     index index.html index.htm index.php;
 	
-		location ~ \.php$ {
+		location ~* \.php$ {
 		try_files \$uri =404;
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
 		fastcgi_cache  microcache;
@@ -217,6 +217,8 @@ server {
 		add_header X-Cache \$upstream_cache_status;
 		fastcgi_buffers 16 16k;
 		fastcgi_buffer_size 32k;
+		fastcgi_read_timeout 120;
+		fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;	
 		
 	}
 	
