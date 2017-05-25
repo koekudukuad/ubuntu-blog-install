@@ -66,7 +66,7 @@ pid        /var/run/nginx.pid;
 
 
 events {
-    worker_connections  3500;
+    worker_connections  35000;
     use epoll;
     #accept_mutex on;
     #accept_mutex_delay 200ms;
@@ -208,13 +208,15 @@ server {
 		fastcgi_index index.php;
 		include fastcgi_params;
 		add_header X-Cache \$upstream_cache_status;
-		expires 8d;
+		fastcgi_buffers 16 16k;
+		fastcgi_buffer_size 32k;
+		
 	}
 	
 	
 
     location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml|mp3|flv)$ {
-        expires 7d;
+        expires 365d;
         access_log off;
         add_header Cache-Control public;
     }
@@ -243,23 +245,5 @@ EOF
 
 #just restarting to make sure they have latest
 service nginx restart
-#service mysql restart
 service php5-fpm restart
 
-##create MySql Database
-#mysql -uroot -p$MYSQLPASS -e "create database ${MYSQLDATABASE}"
-
-
-#cd /usr/share/nginx/www
-#get WordPress latest
-#wget http://wordpress.org/latest.tar.gz
-#tar -xvzf latest.tar.gz
-#move WordPress to web woot
-#mv /usr/share/nginx/www/wordpress/* /usr/share/nginx/www/
-
-#cleanup folder
-#rm -rf wordpress
-
-#Done! 
-#Go through WordPress install with database and password you setup here
-#You may need to create wp-config.php
