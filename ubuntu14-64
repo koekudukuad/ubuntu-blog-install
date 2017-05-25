@@ -139,7 +139,7 @@ http {
     gzip_http_version 1.1;
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 	
-    fastcgi_cache_path /usr/share/nginx/cache/fcgi levels=1:2 keys_zone=microcache:10m max_size=1024m inactive=1h;
+ 
 
   # Cloudflare module cho nginx
     set_real_ip_from   204.93.240.0/24;
@@ -192,7 +192,7 @@ cat /dev/null > /etc/nginx/sites-available/default
 
 cat << EOF | tee -a /etc/nginx/sites-available/default
 fastcgi_cache_path /usr/share/nginx/cache levels=1:2 keys_zone=MYAPP:100m inactive=60m;
-fastcgi_cache_key "$scheme$request_method$host$request_uri";
+fastcgi_cache_key "\$scheme\$request_method\$host\$request_uri";
 
 server {
 	listen 80;
@@ -200,7 +200,7 @@ server {
 	root /usr/share/nginx/www;
 	index index.php;
 	location / {
-		try_files $uri $uri/ /index.php?q=$uri&$args;
+		try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
 	}
 	location /xmlrpc.php {
 		deny all;
