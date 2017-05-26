@@ -57,7 +57,7 @@ cat /dev/null > /etc/nginx/nginx.conf
 
 cat << EOF | tee -a /etc/nginx/nginx.conf
 user  www-data;
-worker_processes  2;
+worker_processes  auto;
 #worker_priority -10;
 worker_rlimit_nofile 100000;
 
@@ -110,10 +110,10 @@ http {
     fastcgi_read_timeout 600s;
     fastcgi_param   SCRIPT_FILENAME    \$document_root$fastcgi_script_name;
     fastcgi_param   SCRIPT_NAME        \$fastcgi_script_name;
-    fastcgi_buffer_size 128k;
-    fastcgi_buffers 256 16k;
+    fastcgi_buffer_size 256k;
+    fastcgi_buffers 4 512k;
     fastcgi_busy_buffers_size 256k;
-    fastcgi_temp_file_write_size 256k;
+    fastcgi_temp_file_write_size 512k;
 
     client_body_buffer_size 256k;
     client_body_timeout 3000;
@@ -197,7 +197,7 @@ rm -rf mkdir /usr/share/nginx/html
 cat /dev/null > /etc/nginx/sites-available/default
 
 cat << EOF | tee -a /etc/nginx/sites-available/default
-fastcgi_cache_path /usr/share/nginx/cache levels=1:2 keys_zone=MYAPP:100m inactive=60m;
+fastcgi_cache_path /usr/share/nginx/cache levels=1:2 keys_zone=MYAPP:20000m inactive=3d;
 fastcgi_cache_key "\$scheme\$request_method\$host\$request_uri";
 
 server {
@@ -215,8 +215,12 @@ server {
 		fastcgi_pass unix:/var/run/php5-fpm.sock;
 		fastcgi_index index.php;
 		include fastcgi_params;
+		fastcgi_cache_methods GET POST;
 		fastcgi_cache MYAPP;
-        fastcgi_cache_valid 200 60s;
+        	fastcgi_cache_valid 200 3d;
+		fastcgi_cache_valid 302 1s;
+		fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_403 http_404 off;
+		add_header X-Cache $upstream_cache_status;
 	}
 
 
