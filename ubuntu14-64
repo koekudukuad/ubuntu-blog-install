@@ -210,7 +210,7 @@ server {
 		fastcgi_index index.php;
 		include fastcgi_params;
 		fastcgi_cache MYAPP;
-        fastcgi_cache_valid 200 60m;
+        fastcgi_cache_valid 200 60s;
 	}
 
 
