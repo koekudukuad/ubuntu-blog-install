@@ -109,7 +109,7 @@ http {
     fastcgi_param   SCRIPT_NAME        \$fastcgi_script_name;
     fastcgi_buffer_size 256k;
     fastcgi_buffers 4 512k;
-    fastcgi_busy_buffers_size 256k;
+    fastcgi_busy_buffers_size 512k;
     fastcgi_temp_file_write_size 512k;
 
     client_body_buffer_size 256k;
@@ -217,7 +217,7 @@ server {
         	fastcgi_cache_valid 200 3d;
 		fastcgi_cache_valid 302 1s;
 		fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_403 http_404 off;
-		add_header X-Cache $upstream_cache_status;
+		add_header X-Cache \$upstream_cache_status;
 	}
 
 
