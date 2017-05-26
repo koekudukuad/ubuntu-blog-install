@@ -21,7 +21,7 @@ pm.max_children = 2
 find /var/log -type f -delete
 
 
-find /usr/share/nginx/cache/fcgi -type f -delete
+find /usr/share/nginx/cache -type f -delete
 
 find /var/www/nginx-cache -type f -delete
 
