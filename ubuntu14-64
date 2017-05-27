@@ -194,8 +194,8 @@ rm -rf /usr/share/nginx/html
 cat /dev/null > /etc/nginx/sites-available/default
 
 cat << EOF | tee -a /etc/nginx/sites-available/default
-fastcgi_cache_path /usr/share/nginx/cache levels=1:2 keys_zone=MYAPP:20000m inactive=3d;
-fastcgi_cache_key "\$scheme\$request_method\$host\$request_uri";
+#fastcgi_cache_path /usr/share/nginx/cache levels=1:2 keys_zone=MYAPP:20000m inactive=3d;
+#fastcgi_cache_key "\$scheme\$request_method\$host\$request_uri";
 
 server {
 	listen 80;
@@ -205,18 +205,21 @@ server {
 	location / {
 		try_files \$uri \$uri/ /index.php?\$args;
 	}
-	location /xmlrpc.php {
-		deny all;
+	
+	location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml|mp3|flv)$ {
+        expires max;
+        
+    
 	}
 	location ~ \.php$ {
 		fastcgi_pass unix:/var/run/php5-fpm.sock;
 		fastcgi_index index.php;
 		include fastcgi_params;
-		fastcgi_cache_methods GET POST;
-		fastcgi_cache MYAPP;
-        	fastcgi_cache_valid 200 3d;
-		fastcgi_cache_valid 302 1s;
-		fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_404 off;
+		#fastcgi_cache_methods GET POST;
+		#fastcgi_cache MYAPP;
+        	#fastcgi_cache_valid 200 3d;
+		#fastcgi_cache_valid 302 1s;
+		#fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_404 off;
 		add_header X-Cache \$upstream_cache_status;
 	}
 
