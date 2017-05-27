@@ -180,7 +180,7 @@ EOF
 #more advanced configuration options and plugin info available here: https://rtcamp.com/wordpress-nginx/tutorials/single-site/fastcgi-cache-with-purging/
 mkdir /usr/share/nginx/cache
 mkdir /usr/share/nginx/www
-rm -rf mkdir /usr/share/nginx/html
+rm -rf /usr/share/nginx/html
 
 #sed -i "s/^\tworker_connections 768;/\tworker_connections 1536;/" /etc/nginx/nginx.conf
 
