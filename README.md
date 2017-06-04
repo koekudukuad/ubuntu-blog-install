@@ -33,7 +33,7 @@ _Estimated time: 1 minute_
 
 clean OS
 
-sudo apt-get remove mysql-server* apache2* php5* php* mysql* && sudo apt-get autoremove
+sudo apt-get remove mysql-server* apache* php* mysql* && sudo apt-get autoremove
 
 sudo chown -R www-data:www-data *
 
