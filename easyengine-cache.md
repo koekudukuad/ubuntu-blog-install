@@ -17,10 +17,7 @@
 	fastcgi_keep_conn on;
 	fastcgi_cache WORDPRESS;
       		
-      
-#buat folder nginx-cache
 
-/var/www/nginx-cache
 
 #restart
 ee stack restart
