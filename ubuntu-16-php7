@@ -186,7 +186,9 @@ EOF
 
 #just restarting to make sure they have latest
 service nginx restart
-service php5-fpm restart
+service php7.0-fpm restart
+
+
 
 sudo cat > /var/www/index.php <<END
 <?php
