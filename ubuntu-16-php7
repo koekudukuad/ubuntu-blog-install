@@ -11,7 +11,44 @@ apt-get -y install nginx
 apt-get install -y php7.0-cli php7.0-cgi php7.0-fpm zip unzip sudo
 
 #configure phpfpm settings
-#sed -i "s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
+sed -i "s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.0/fpm/php.ini
+
+
+
+
+cat /dev/null > /etc/php/7.0/fpm/pool.d/www.conf
+
+cat << EOF | tee -a /etc/php/7.0/fpm/pool.d/www.conf
+[www]
+user = www-data
+group = www-data
+listen = /var/run/php7.0-fpm.sock
+listen.allowed_clients = 127.0.0.1
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0660
+
+pm = ondemand
+pm.max_children = 75
+pm.start_servers = 20
+pm.min_spare_servers = 10
+pm.max_spare_servers = 35
+pm.process_idle_timeout = 10s
+pm.max_requests = 500
+chdir = /
+pm.status_path = /php_status
+request_terminate_timeout = 300s
+listen.backlog = 65535
+rlimit_files = 131072
+rlimit_core = unlimited
+catch_workers_output = yes
+env[HOSTNAME] = $HOSTNAME
+env[TMP] = /tmp
+env[TMPDIR] = /tmp
+env[TEMP] = /tmp
+EOF
+
+
 
 #cat /dev/null > /etc/php5/fpm/pool.d/www.conf
 
