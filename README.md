@@ -56,6 +56,10 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 wget --no-check-certificate  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu14-64 && chmod +x ubuntu14-64 && ./ubuntu14-64
 
 
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu-16-php7 && chmod +x ubuntu-16-php7 && ./ubuntu-16-php7
+
+
+
 This script installs:
 - NGINX
 - PHP5 (with mysql, curl and gd support)
