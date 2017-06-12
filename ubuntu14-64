@@ -23,30 +23,20 @@ cat << EOF | tee -a /etc/php5/fpm/pool.d/www.conf
 [www]
 user = www-data
 group = www-data
-listen = /var/run/php5-fpm.sock
+listen = 127.0.0.1:9000
 listen.allowed_clients = 127.0.0.1
 listen.owner = www-data
 listen.group = www-data
-listen.mode = 0660
-
 pm = ondemand
-pm.max_children = 75
+pm.max_children = 100
 pm.start_servers = 20
 pm.min_spare_servers = 10
-pm.max_spare_servers = 35
-pm.process_idle_timeout = 10s
+pm.max_spare_servers = 30
+ping.path = /ping
+pm.status_path = /status
 pm.max_requests = 500
-chdir = /
-pm.status_path = /php_status
-request_terminate_timeout = 300s
-listen.backlog = 65535
-rlimit_files = 131072
-rlimit_core = unlimited
-catch_workers_output = yes
-env[HOSTNAME] = $HOSTNAME
-env[TMP] = /tmp
-env[TMPDIR] = /tmp
-env[TEMP] = /tmp
+request_terminate_timeout = 300
+
 EOF
 
 
@@ -212,15 +202,17 @@ server {
     
 	}
 	location ~ \.php$ {
-		fastcgi_pass unix:/var/run/php5-fpm.sock;
-		fastcgi_index index.php;
-		include fastcgi_params;
-		#fastcgi_cache_methods GET POST;
-		#fastcgi_cache MYAPP;
-        	#fastcgi_cache_valid 200 3d;
-		#fastcgi_cache_valid 302 1s;
-		#fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_404 off;
-		add_header X-Cache \$upstream_cache_status;
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	fastcgi_pass 127.0.0.1:9000;
+	fastcgi_index index.php;
+	include fastcgi_params;
+	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	#fastcgi_cache_methods GET POST;
+	#fastcgi_cache MYAPP;
+        #fastcgi_cache_valid 200 3d;
+	#fastcgi_cache_valid 302 1s;
+	#fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_404 off;
+	add_header X-Cache $upstream_cache_status;
 	}
 
 
