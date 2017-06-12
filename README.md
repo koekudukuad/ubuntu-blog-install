@@ -28,12 +28,11 @@ find /var/www/nginx-cache -type f -delete
 
 
 
-This bash script will install Wordpress on your Ubuntu machine.  
-_Estimated time: 1 minute_ 
+
 
 clean OS
 
-sudo apt-get remove mysql-server* apache* php* mysql* && sudo apt-get autoremove
+sudo apt-get remove --purge -y apache* php* mysql* && sudo apt-get autoremove apt-get clean
 
 sudo chown -R www-data:www-data *
 
