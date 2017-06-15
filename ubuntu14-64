@@ -197,6 +197,8 @@ server {
 	}
 	
 	location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml|mp3|flv)$ {
+	access_log        off;
+    	log_not_found     off;
         expires max;
         
     
@@ -206,13 +208,13 @@ server {
 	fastcgi_pass 127.0.0.1:9000;
 	fastcgi_index index.php;
 	include fastcgi_params;
-	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
 	#fastcgi_cache_methods GET POST;
 	#fastcgi_cache MYAPP;
         #fastcgi_cache_valid 200 3d;
 	#fastcgi_cache_valid 302 1s;
 	#fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_404 off;
-	add_header X-Cache $upstream_cache_status;
+	add_header X-Cache \$upstream_cache_status;
 	}
 
 
