@@ -102,14 +102,14 @@ http {
     fastcgi_busy_buffers_size 512k;
     fastcgi_temp_file_write_size 512k;
 
-    client_body_buffer_size 256k;
+    client_body_buffer_size 5M;
     client_body_timeout 3000;
     client_header_buffer_size 64k;
     client_body_in_file_only off;
     large_client_header_buffers 4 256k;
     client_header_timeout  3000;
     ignore_invalid_headers on; 
-    client_max_body_size 120m;
+    client_max_body_size 120M;
     
     
     keepalive_timeout 20;
