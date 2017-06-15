@@ -49,7 +49,7 @@ worker_processes  auto;
 worker_rlimit_nofile 100000;
 
 
-error_log  /var/log/nginx/error.log crit;
+error_log  /dev/null   crit;
 pid        /var/run/nginx.pid;
 
 
@@ -192,6 +192,8 @@ server {
 	server_name _;
 	root /usr/share/nginx/www;
 	index index.php;
+	access_log off;
+	error_log /dev/null   crit;
 	location / {
 		try_files \$uri \$uri/ /index.php?\$args;
 	}
