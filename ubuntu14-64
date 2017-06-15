@@ -56,7 +56,7 @@ pid        /var/run/nginx.pid;
 events {
     worker_connections  35000;
     use epoll;
-    #accept_mutex on;
+    accept_mutex off;
     #accept_mutex_delay 200ms;
     multi_accept on;
 }
