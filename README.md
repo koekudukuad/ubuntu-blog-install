@@ -32,7 +32,7 @@ find /var/www/nginx-cache -type f -delete
 
 clean OS
 
-sudo apt-get remove --purge -y apache* php* mysql* && sudo apt-get autoremove apt-get clean
+sudo apt-get remove --purge -y apache* php* mysql* ubuntu-release-upgrader-core && sudo apt-get autoremove apt-get clean
 
 sudo chown -R www-data:www-data *
 
