@@ -1,7 +1,7 @@
 nano /etc/apt/sources.list
 
 cd error
-
+============================
 
 php5 fpm easting cpu
 
@@ -16,7 +16,7 @@ pm = ondemand
 
 pm.max_children = 2
 
-
+==============================
 
 find /var/log -type f -delete
 
@@ -24,8 +24,10 @@ find /var/log -type f -delete
 find /usr/share/nginx/cache -type f -delete
 
 find /var/www/nginx-cache -type f -delete
+=================================
+sudo: unable to resolve host localhost.localdomain
 
-
+echo $(hostname -I | cut -d\  -f1) $(hostname) | sudo tee -a /etc/hosts
 
 
 
