@@ -1,3 +1,11 @@
+disable ipv6 update
+
+nano /etc/apt/apt.conf.d/99force-ipv4
+
+Acquire::ForceIPv4 "true";
+=========================
+
+
 nano /etc/apt/sources.list
 
 cd error
