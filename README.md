@@ -1,3 +1,11 @@
+check folder size 
+
+du -sh /*
+
+
+===================
+
+
 disable ipv6 update
 
 nano /etc/apt/apt.conf.d/99force-ipv4
