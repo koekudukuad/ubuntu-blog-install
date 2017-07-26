@@ -58,6 +58,7 @@ find /var/www/nginx-cache -type f -delete
 
 
 sudo: unable to resolve host localhost.localdomain
+#tambahi spasi after cut -d\ 
 
 echo $(hostname -I | cut -d\    -f1) $(hostname) | sudo tee -a /etc/hosts
 
