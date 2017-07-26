@@ -13,7 +13,7 @@ sudo wget https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/
 du -sh /*
 
 
-===================
+===================================
 
 
 #disable ipv6 update
@@ -21,12 +21,15 @@ du -sh /*
 nano /etc/apt/apt.conf.d/99force-ipv4
 
 Acquire::ForceIPv4 "true";
-=========================
+
+
+===================================
 
 
 nano /etc/apt/sources.list
 
 cd error
+
 ============================
 
 php5 fpm easting cpu
@@ -50,7 +53,10 @@ find /var/log -type f -delete
 find /usr/share/nginx/cache -type f -delete
 
 find /var/www/nginx-cache -type f -delete
+
 =================================
+
+
 sudo: unable to resolve host localhost.localdomain
 
 echo $(hostname -I | cut -d\    -f1) $(hostname) | sudo tee -a /etc/hosts
