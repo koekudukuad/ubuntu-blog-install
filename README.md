@@ -53,7 +53,9 @@ find /var/www/nginx-cache -type f -delete
 =================================
 sudo: unable to resolve host localhost.localdomain
 
+echo $(hostname -I | cut -d\   -f1) $(hostname) | sudo tee -a /etc/hosts
 echo $(hostname -I | cut -d\  -f1) $(hostname) | sudo tee -a /etc/hosts
+
 
 
 
