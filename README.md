@@ -1,4 +1,14 @@
-check folder size 
+#block
+
+sudo wget  https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blockips.conf -O /etc/nginx/conf.d/blockips.conf
+
+
+sudo wget https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blacklist.conf -O /etc/nginx/conf.d/blacklist.conf
+
+
+===================================
+
+#check folder size 
 
 du -sh /*
 
@@ -6,7 +16,7 @@ du -sh /*
 ===================
 
 
-disable ipv6 update
+#disable ipv6 update
 
 nano /etc/apt/apt.conf.d/99force-ipv4
 
