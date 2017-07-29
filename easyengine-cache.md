@@ -5,7 +5,7 @@
 
 
 	# FastCGI cache settings
-	fastcgi_cache_path /var/run/nginx-cache levels=1:2 keys_zone=WORDPRESS:20000m inactive=6d;
+	fastcgi_cache_path /var/run/nginx-cache levels=1:2 keys_zone=WORDPRESS:10m max_size=1024m inactive=3d;
 	fastcgi_cache_key "$scheme$request_method$host$request_uri";
 	fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_503;
 	fastcgi_cache_valid 200 3d;
