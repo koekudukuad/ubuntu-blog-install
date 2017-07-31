@@ -79,6 +79,9 @@ sudo chown -R www-data:www-data *
 Copy and run this script:  
 
 
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ee_ioncube && chmod +x ee_ioncube && ./ee_ioncube
+
+
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/phpmyadmin && chmod +x phpmyadmin && ./phpmyadmin
 
