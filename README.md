@@ -78,7 +78,7 @@ sudo chown -R www-data:www-data *
 ### Install
 Copy and run this script:  
 
-
+ee ioncube php 5.6
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ee_ioncube && chmod +x ee_ioncube && ./ee_ioncube
 
 
