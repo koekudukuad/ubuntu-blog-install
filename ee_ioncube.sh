@@ -1,6 +1,5 @@
 #!/bin/bash
-# IonCube Auto Install
-# chk.harmony-hosting.com
+
 
 # Script begin
 clear
