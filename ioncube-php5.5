@@ -9,7 +9,7 @@ cd /root
 APT_GET="apt-get -y -qq"
 
 # Information
-echo -e "\\033[1;34m#### \\033[1;33m        IonCube Auto install EE PHP 5.6       \\033[1;34m #### \\033[0;39m"
+echo -e "\\033[1;34m#### \\033[1;33m        IonCube Auto install Custom PHP 5.5       \\033[1;34m #### \\033[0;39m"
 echo "Run script ..."
 
 #  Update
@@ -78,3 +78,4 @@ echo -e "\r\e[0;32m[OK]\e[0m Add IonCube to PHP                "
 echo -n "[In progress] Reboot nginx & Php ..."
 service php5-fpm restart
 service nginx restart
+php -v
