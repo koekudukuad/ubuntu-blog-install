@@ -99,6 +99,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/LAMP && chmod +x LAMP && ./LAMP
 
 
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu14-64-php56 && chmod +x ubuntu14-64-php56 && ./ubuntu14-64-php56
 
 wget --no-check-certificate  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu14-64 && chmod +x ubuntu14-64 && ./ubuntu14-64
 
