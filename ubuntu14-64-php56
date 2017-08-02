@@ -4,7 +4,8 @@
 
 #update everything
 apt-get update
-#install php, mysql, nginx
+apt-get install software-properties-common python-software-properties -y
+apt-add-repository ppa:ondrej/php -y
 apt-get -y install nginx
 
 
