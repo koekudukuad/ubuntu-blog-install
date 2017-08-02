@@ -169,6 +169,7 @@ EOF
 #mkdir /usr/share/nginx/cache
 #mkdir /usr/share/nginx/www
 rm -rf /var/www/html
+mkdir /var/www
 
 #sed -i "s/^\tworker_connections 768;/\tworker_connections 1536;/" /etc/nginx/nginx.conf
 
