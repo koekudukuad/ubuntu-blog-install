@@ -7,7 +7,7 @@ apt-get update
 apt-get install software-properties-common python-software-properties -y
 apt-add-repository ppa:ondrej/php -y
 apt-get -y install nginx
-
+apt-get update
 
 
 apt-get install -y php5.6-mysql php5.6-fpm php5.6-gd php5.6-cli php5.6-curl zip unzip sudo
