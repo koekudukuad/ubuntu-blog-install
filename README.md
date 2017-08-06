@@ -1,3 +1,6 @@
+wget  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/conf.maldet -O /usr/local/maldetect/conf.maldet
+
+
 #block
 
 sudo wget  https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blockips.conf -O /etc/nginx/conf.d/blockips.conf
