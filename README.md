@@ -1,5 +1,4 @@
-wget  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/conf.maldet -O /usr/local/maldetect/conf.maldet
-
+wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/maldet && chmod +x maldet && ./maldet
 
 #block
 
