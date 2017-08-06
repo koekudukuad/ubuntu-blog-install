@@ -1,0 +1,12 @@
+#!/bin/bash
+wget http://www.rfxn.com/downloads/maldetect-current.tar.gz
+tar -xvf maldetect-current.tar.gz
+cd maldetect-1.6.2
+./install.sh
+maldet -u
+
+
+yum -y install clamav clamav-devel
+freshclam
+
+wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/conf.maldet -O /usr/local/maldetect/conf.maldet#!/bin/bash
