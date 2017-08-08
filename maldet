@@ -6,8 +6,11 @@ cd maldetect-*
 maldet -u
 
 
-yum -y install clamav clamav-devel
+
 apt-get install clamav clamav-daemon clamav-freshclam -y
+/etc/init.d/clamav-daemon start
+
+yum install clamav clamav-devel -y
 freshclam
 
 wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/conf.maldet -O /usr/local/maldetect/conf.maldet
