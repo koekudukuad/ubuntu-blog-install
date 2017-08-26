@@ -1,3 +1,25 @@
+
+================================================================
+after install iso 
+
+sudo passwd root
+
+Login, and edit this file: sudo nano /etc/ssh/sshd_config
+
+Find this line: PermitRootLogin without-password
+
+Edit: PermitRootLogin yes
+
+Close and save file
+
+reboot or restart sshd service using: /etc/init.d/ssh restart
+
+
+================================================================
+
+
+
+
 wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/maldet && chmod +x maldet && ./maldet
 
 #block
