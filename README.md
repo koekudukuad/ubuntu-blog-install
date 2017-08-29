@@ -4,6 +4,13 @@ after install iso
 
 sudo passwd root
 
+sed -i 's/without-password/yes/' /etc/ssh/sshd_config
+sed -i 's/prohibit-password/yes/' /etc/ssh/sshd_config
+
+/etc/init.d/ssh restart
+
+atau 
+
 Login, and edit this file: sudo nano /etc/ssh/sshd_config
 
 Find this line: PermitRootLogin without-password
