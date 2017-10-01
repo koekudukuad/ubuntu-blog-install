@@ -5,8 +5,8 @@
 #update everything
 apt-get update
 apt-get install software-properties-common python-software-properties -y
-sudo locale-gen en_US.UTF-8 -y
-export LANG=en_US.UTF-8 -y
+sudo locale-gen en_US.UTF-8
+export LANG=en_US.UTF-8
 apt-add-repository ppa:ondrej/php -y
 apt-get -y install nginx
 apt-get update
