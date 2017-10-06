@@ -1,6 +1,12 @@
 
 ================================================================
-after install iso 
+
+error dpkg was interrupted
+
+sudo apt-get update; sudo apt-get autoclean; sudo apt-get upgrade; sudo apt-get autoremove
+
+================================================================
+after install iso dan gak bisa login
 
 sudo passwd root
 
