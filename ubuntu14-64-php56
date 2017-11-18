@@ -9,6 +9,7 @@ sudo locale-gen en_US.UTF-8
 export LANG=en_US.UTF-8
 apt-add-repository ppa:ondrej/php -y
 apt-get -y install nginx
+apt-get -y install fail2ban
 apt-get update
 
 
