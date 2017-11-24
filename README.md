@@ -107,7 +107,7 @@ echo $(hostname -I | cut -d\    -f1) $(hostname) | sudo tee -a /etc/hosts
 
 clean OS
 
-sudo apt-get remove --purge -y apache2* apache* php* mysql* ubuntu-release-upgrader-core && sudo apt-get autoremove apt-get clean
+apt-get remove --purge -y apache2* apache* php* mysql* ubuntu-release-upgrader-core && apt-get autoremove
 
 sudo chown -R www-data:www-data *
 
