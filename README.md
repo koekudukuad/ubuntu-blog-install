@@ -34,8 +34,6 @@ reboot or restart sshd service using: /etc/init.d/ssh restart
 
 
 
-wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/maldet && chmod +x maldet && ./maldet
-
 #block
 
 sudo wget  https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blockips.conf -O /etc/nginx/conf.d/blockips.conf
@@ -114,17 +112,21 @@ sudo chown -R www-data:www-data *
 
 
 ### Install
+#maldet
 
-backupdb
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/maldet && chmod +x maldet && ./maldet
 
-wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/backupdb.sh && chmod +x backupdb && ./backupdb
-Copy and run this script:  
-ee ioncube php 5.5
+
+#backupdb
+
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/backupdb && chmod +x backupdb && ./backupdb
+ 
+#ee ioncube php 5.5
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ioncube-php5.5 && chmod +x ioncube-php5.5 && ./ioncube-php5.5
 
 
-ee ioncube php 5.6
+#ee ioncube php 5.6
 
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ee_ioncube && chmod +x ee_ioncube && ./ee_ioncube
@@ -132,35 +134,21 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 
 
 
+#phpmyadmin
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/phpmyadmin && chmod +x phpmyadmin && ./phpmyadmin
 
+#LAMP
 
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/LAMP && chmod +x #LAMPvvvvvvvvv
+&& ./LAMP
 
-
-wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/LAMP && chmod +x LAMP && ./LAMP
-
+#lemp php5-6
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu14-64-php56 && chmod +x ubuntu14-64-php56 && ./ubuntu14-64-php56
 
+#lemp php5-5
 wget --no-check-certificate  https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu14-64 && chmod +x ubuntu14-64 && ./ubuntu14-64
 
-
+#lemp php7
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu-16-php7 && chmod +x ubuntu-16-php7 && ./ubuntu-16-php7
-
-
-
-This script installs:
-- NGINX
-- PHP5 (with mysql, curl and gd support)
-- MySQL
-- Wordpress
-
-
-Non wordpress clean mysql 
-
-sudo apt-get remove --purge mysql-server mysql-client mysql-common
-
-sudo apt-get autoremove
-
-sudo apt-get autoclean
