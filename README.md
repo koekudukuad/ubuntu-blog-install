@@ -119,7 +119,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 
 #backupdb
 
-wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/backupdb -O /home && chmod +x backupdb && ./backupdb
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/backupdb && chmod +x backupdb && ./backupdb
  
 #ee ioncube php 5.5
 
