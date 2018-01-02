@@ -121,7 +121,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 #wget to home
 #edit pass
 #add cronjob vpssim
-#* * 20 * * /home/backupdb >/dev/null 2>&1
+#* * 20 * * /home/./backupdb >/dev/null 2>&1
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/backupdb && chmod +x backupdb && ./backupdb
  
