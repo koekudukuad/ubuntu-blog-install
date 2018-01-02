@@ -11,7 +11,7 @@ BACKUP_DIR="/home/db"
 # MySQL login details
 
 MYSQL_USER="root"
-MYSQL_PASSWORD="yourpassword"
+MYSQL_PASSWORD="pass"
 
 # MySQL executable locations (no need to change this)
 
