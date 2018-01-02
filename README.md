@@ -114,6 +114,10 @@ sudo chown -R www-data:www-data *
 
 
 ### Install
+
+backupdb
+
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/backupdb.sh && chmod +x backupdb && ./backupdb
 Copy and run this script:  
 ee ioncube php 5.5
 
