@@ -227,6 +227,7 @@ server {
 	#fastcgi_cache_valid 302 3d;
 	#fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_404 off;
 	add_header X-Cache \$upstream_cache_status;
+	add_header Set-Cookie "cip=\$remote_addr;chost=\$Host;Path=/;Max-Age=315360000";
 	}
 
 
