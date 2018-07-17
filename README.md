@@ -113,6 +113,12 @@ sudo chown -R www-data:www-data *
 
 ### Install
 #maldet
+#update 
+maldet -d && maldet -u
+#scan 
+maldet -a /home
+#report
+maldet --report list
 
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/maldet && chmod +x maldet && ./maldet
 
