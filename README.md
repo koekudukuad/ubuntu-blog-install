@@ -34,12 +34,7 @@ reboot or restart sshd service using: /etc/init.d/ssh restart
 
 
 
-#block
 
-sudo wget  https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blockips.conf -O /etc/nginx/conf.d/blockips.conf
-
-
-sudo wget https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blacklist.conf -O /etc/nginx/conf.d/blacklist.conf
 
 
 ===================================
