@@ -81,6 +81,7 @@ http {
     server_tokens off;
     server_name_in_redirect off;
     server_names_hash_bucket_size 128;
+    server_names_hash_max_size 4096;
     open_file_cache max=130000 inactive=20s;
     open_file_cache_valid 30s;
     open_file_cache_min_uses 2;
@@ -115,7 +116,9 @@ http {
     
     limit_conn_zone \$binary_remote_addr zone=conn_limit_per_ip:10m;
     limit_req_zone \$binary_remote_addr zone=req_limit_per_ip:10m rate=5r/s;
-    
+    limit_req_zone \$binary_remote_addr zone=flood:50m rate=90r/s;
+    limit_conn_zone \$binary_remote_addr zone=addr:50m;
+	
     keepalive_timeout 20;
     keepalive_requests 1000;
     keepalive_disable msie6;
@@ -200,6 +203,21 @@ server {
 	access_log off;
 	error_log /dev/null   crit;
 	
+	
+	limit_conn bot2_connlimit 10;
+	if ($bad_bot = '3') {
+	  return 444;
+	  }
+	if ($bad_words) {
+	  return 444;
+	}
+	if ($bad_referer) {
+	  return 444;
+	}
+	if ($validate_client) {
+	  return 444;
+	}
+	
 	limit_conn conn_limit_per_ip 10;
  	limit_req zone=req_limit_per_ip burst=10 nodelay;
     
@@ -238,9 +256,8 @@ EOF
 
 
 
-wget https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blockips.conf -O /etc/nginx/conf.d/blockips.conf
 
-wget https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blacklist.conf -O /etc/nginx/conf.d/blacklist.conf
+wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/blacklist.conf -O /etc/nginx/conf.d/blacklist.conf
 
 #just restarting to make sure they have latest
 service nginx restart
