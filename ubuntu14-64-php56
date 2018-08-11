@@ -259,10 +259,14 @@ EOF
 
 
 wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/blacklist.conf -O /etc/nginx/conf.d/blacklist.conf
+wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/conf/jail.local -O /etc/fail2ban/jail.local
+wget https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/conf/nginx-req-limit.conf -O /etc/fail2ban/filter.d/nginx-req-limit.conf
 
 #just restarting to make sure they have latest
 service nginx restart
 service php5.6-fpm restart
+service fail2ban restart
+fail2ban-client status nginx-req-limit
 
 sudo cat > /var/www/index.php <<END
 <?php
