@@ -80,6 +80,7 @@ pm.max_children = 2
 
 find /var/log -type f -delete
 
+find /var/www/temporary-cache/ -mtime +100  -type f -delete
 
 find /usr/share/nginx/cache -type f -delete
 
