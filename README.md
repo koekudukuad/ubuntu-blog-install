@@ -1,4 +1,6 @@
+dari user agar dapat akses root
 
+sudo -i
 ================================================================
 
 error dpkg was interrupted
