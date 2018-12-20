@@ -1,6 +1,14 @@
 dari user agar dapat akses root
 
 sudo -i
+
+atau mendapatkan hak akses root
+
+sudo passwd root ( enter password kmudian ketik new password )
+
+sudo passwd -u root  ( enable root akun )
+
+
 ================================================================
 
 error dpkg was interrupted
