@@ -1,3 +1,6 @@
+hak access root
+
+sudo -i
 ================================================================
 
 error dpkg was interrupted
