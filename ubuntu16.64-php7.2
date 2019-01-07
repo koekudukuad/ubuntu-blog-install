@@ -9,13 +9,11 @@ apt-get install software-properties-common python-software-properties -y
 sudo locale-gen en_US.UTF-8
 export LANG=en_US.UTF-8
 apt-add-repository ppa:ondrej/php -y
-apt-get -y install nginx
-apt-get -y install fail2ban
 apt-get update
 
 
 #install php
-apt-get -y install zip sudo htop apt-get install php7.2-cli php7.2-fpm php7.2-curl php7.2-gd php7.2-mysql php7.2-mbstring zip unzip
+apt-get -y install unzip zip nginx fail2ban php7.2 php7.2-mysql php7.2-fpm php7.2-mbstring php7.2-xml php7.2-curl htop
 
 
 #configure nginx
