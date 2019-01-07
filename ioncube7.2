@@ -76,6 +76,9 @@ echo -e "\r\e[0;32m[OK]\e[0m Add IonCube to PHP                "
 
 #  Reboot nginx & Php
 echo -n "[In progress] Reboot nginx & Php ..."
+
 service php7.2-fpm restart
+
 service nginx restart
+
 php -v
