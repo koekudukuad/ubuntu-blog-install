@@ -165,4 +165,6 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 
 
 #lemp php7.2
+
+
 wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ubuntu16.64-php7.2 && chmod +x ubuntu16.64-php7.2 && ./ubuntu16.64-php7.2
