@@ -14,164 +14,8 @@ apt-get -y install fail2ban
 apt-get update
 
 
-#apt-get -y install php7.2-fpm php7.2-gd php7.2-cli php7.2-curl php7.2-mbstring zip unzip sudo php-memcached htop
-apt-get -y install zip sudo htop php7.2-fpm php7.2-curl php7.2-gd php7.2-imap php7.2-mcrypt php7.2-readline php7.2-mysql php7.2-cli php7.2-common php7.2-curl php7.2-mbstring php7.2-bcmath php7.2-recode php7.2-mysql php7.2-opcache php-memcached php-imagick php-xdebug php-msgpack php7.2-zip php7.2-xml php7.2-soap php-memcache 
-#configure phpfpm settings
-sed -i "s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.2/fpm/php.ini
-
-cat /dev/null > /etc/php/7.2/fpm/pool.d/www.conf
-
-cat << EOF | tee -a /etc/php/7.2/fpm/pool.d/www.conf
-[www]
-user = www-data
-group = www-data
-listen = 127.0.0.1:9000
-listen.allowed_clients = 127.0.0.1
-listen.owner = www-data
-listen.group = www-data
-pm = ondemand
-pm.max_children = 100
-pm.start_servers = 20
-pm.min_spare_servers = 10
-pm.max_spare_servers = 30
-ping.path = /ping
-pm.status_path = /status
-pm.max_requests = 500
-request_terminate_timeout = 300
-
-EOF
-
-
-cat /dev/null > /etc/nginx/nginx.conf
-
-cat << EOF | tee -a /etc/nginx/nginx.conf
-user  www-data;
-worker_processes  auto;
-#worker_priority -10;
-worker_rlimit_nofile 100000;
-
-
-error_log  /dev/null   crit;
-pid        /var/run/nginx.pid;
-
-
-events {
-    worker_connections  35000;
-    use epoll;
-    accept_mutex off;
-    #accept_mutex_delay 200ms;
-    multi_accept on;
-}
-
-
-http {
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
-    log_format  main  '\$remote_addr - \$remote_user [\$time_local] "\$request" '
-                      '\$status \$body_bytes_sent "\$http_referer" '
-                      '"\$http_user_agent" "\$http_x_forwarded_for"';
-
-
-    access_log  off;
-    sendfile on;
-    sendfile_max_chunk 512k;
-    tcp_nopush on;
-    tcp_nodelay on;
-    types_hash_max_size 2048;
-    server_tokens off;
-    server_name_in_redirect off;
-    server_names_hash_bucket_size 128;
-    server_names_hash_max_size 4096;
-    open_file_cache max=130000 inactive=20s;
-    open_file_cache_valid 30s;
-    open_file_cache_min_uses 2;
-    open_file_cache_errors off;
-    open_log_file_cache max=10000 inactive=30s min_uses=2;
-    output_buffers   8 256k;
-    postpone_output  1460;
-    request_pool_size  32k;    
-    connection_pool_size  512;
-    directio 4m;
-    
-    proxy_connect_timeout  600s;
-    proxy_send_timeout  600s;
-    proxy_read_timeout  600s;
-    fastcgi_send_timeout 600s;
-    fastcgi_read_timeout 600s;
-    fastcgi_param   SCRIPT_FILENAME    \$document_root$fastcgi_script_name;
-    fastcgi_param   SCRIPT_NAME        \$fastcgi_script_name;
-    fastcgi_buffer_size 256k;
-    fastcgi_buffers 4 512k;
-    fastcgi_busy_buffers_size 512k;
-    fastcgi_temp_file_write_size 512k;
-
-    client_body_buffer_size 5M;
-    client_body_timeout 3000;
-    client_header_buffer_size 64k;
-    client_body_in_file_only off;
-    large_client_header_buffers 4 256k;
-    client_header_timeout  3000;
-    ignore_invalid_headers on; 
-    client_max_body_size 120M;
-    
-    limit_conn_zone \$binary_remote_addr zone=conn_limit_per_ip:10m;
-    limit_req_zone \$binary_remote_addr zone=req_limit_per_ip:10m rate=5r/s;
-    
-    limit_req_zone \$binary_remote_addr zone=flood:50m rate=90r/s;
-    limit_conn_zone \$binary_remote_addr zone=addr:50m;
-	
-    keepalive_timeout 20;
-    keepalive_requests 1000;
-    keepalive_disable msie6;
-    lingering_time 20s;
-    lingering_timeout 5s;
-    reset_timedout_connection on;
-    send_timeout 600;
-    
-    
-    gzip on;
-    gzip_static on;
-    gzip_disable "msie6";
-    gzip_vary on;
-    gzip_proxied any;
-    gzip_comp_level 5;
-    gzip_buffers 32 8k;
-    gzip_min_length 1024;
-    gzip_http_version 1.1;
-    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
-	
- 
-
-  # Cloudflare module cho nginx
-    set_real_ip_from   204.93.240.0/24;
-    set_real_ip_from   204.93.177.0/24;
-    set_real_ip_from   199.27.128.0/21;
-    set_real_ip_from   173.245.48.0/20;
-    set_real_ip_from   103.21.244.0/22;
-    set_real_ip_from   103.22.200.0/22;
-    set_real_ip_from   103.31.4.0/22;
-    set_real_ip_from   141.101.64.0/18;
-    set_real_ip_from   108.162.192.0/18;
-    set_real_ip_from   190.93.240.0/20;
-    set_real_ip_from   188.114.96.0/20;  
-    set_real_ip_from   197.234.240.0/22;
-    set_real_ip_from   198.41.128.0/17;
-    real_ip_header     CF-Connecting-IP;
-
-    include /etc/nginx/conf.d/*.conf;
-    include /etc/nginx/sites-enabled/*;
-}
-EOF
-
-
-
-
-
-
-
-
-
-
+#install php
+apt-get -y install zip sudo htop apt-get install php7.2-cli php7.2-fpm php7.2-curl php7.2-gd php7.2-mysql php7.2-mbstring zip unzip
 
 
 #configure nginx
@@ -181,79 +25,65 @@ EOF
 rm -rf /var/www/html
 mkdir /var/www
 
-#sed -i "s/^\tworker_connections 768;/\tworker_connections 1536;/" /etc/nginx/nginx.conf
-
-#sed -i "s/^\t#passenger_ruby \/usr\/bin\/ruby;/\t#passenger_ruby \/usr\/bin\/ruby;\n\n\tfastcgi_cache_path \/usr\/share\/nginx\/cache\/fcgi levels=1:2 keys_zone=microcache:10m max_size=1024m inactive=1h;/" /etc/nginx/nginx.conf
-
-
-#sed -i "s/^\tindex index.html index.htm;/\tindex index.php index.html index.htm;/" /etc/nginx/sites-available/default
-#sed -i "s/^\tserver_name localhost;/\tserver_name $SERVERNAMEORIP;/" /etc/nginx/sites-available/default
-#sed -i "s/^\tlocation \/ {/\n\tlocation ~ \\\.php$ {\n\t\ttry_files \$uri =404;\n\t\tfastcgi_split_path_info ^(.+\\\.php)(\/.+)\$;\n\t\tfastcgi_cache  microcache;\n\t\tfastcgi_cache_key \$scheme\$host\$request_uri\$request_method;\n\t\tfastcgi_cache_valid 200 301 302 30s;\n\t\tfastcgi_cache_use_stale updating error timeout invalid_header http_500;\n\t\tfastcgi_pass_header Set-Cookie;\n\t\tfastcgi_pass_header Cookie;\n\t\tfastcgi_ignore_headers Cache-Control Expires Set-Cookie;\n\t\tfastcgi_pass unix:\/var\/run\/php5-fpm.sock;\n\t\tfastcgi_index index.php;\n\t\tinclude fastcgi_params;\n\t\tadd_header X-Cache \$upstream_cache_status;\n\t}\n\tlocation \/ {/" /etc/nginx/sites-available/default
 
 cat /dev/null > /etc/nginx/sites-available/default
 
 cat << EOF | tee -a /etc/nginx/sites-available/default
-#fastcgi_cache_path /usr/share/nginx/cache levels=1:2 keys_zone=MYAPP:10m inactive=3d;
-#fastcgi_cache_key "\$scheme\$request_method\$host\$request_uri";
-
 server {
 	listen 80;
-	server_name _;
+
 	root /var/www;
 	index index.php;
-	access_log off;
-	error_log /dev/null   crit;
-	
-	
-	limit_conn bot2_connlimit 10;
-	if (\$bad_bot = '3') {
-	  return 444;
-	  }
-	if (\$bad_words) {
-	  return 444;
-	}
-	if (\$bad_referer) {
-	  return 444;
-	}
-	if (\$validate_client) {
-	  return 444;
-	}
-	
-	limit_conn conn_limit_per_ip 10;
- 	limit_req zone=req_limit_per_ip burst=10 nodelay;
-    	
-	rewrite ^/sitemap(-+([a-zA-Z0-9_-]+))?\.xml$ "/index.php?xml_sitemap=params=$2" last;
-	rewrite ^/sitemap(-+([a-zA-Z0-9_-]+))?\.xml\.gz$ "/index.php?xml_sitemap=params=$2;zip=true" last;
-	rewrite ^/sitemap(-+([a-zA-Z0-9_-]+))?\.html$ "/index.php?xml_sitemap=params=$2;html=true" last;
-	rewrite ^/sitemap(-+([a-zA-Z0-9_-]+))?\.html.gz$ "/index.php?xml_sitemap=params=$2;html=true;zip=true" last;
-    
-	location / {
-		try_files \$uri \$uri/ /index.php?\$args;
-	}
-	
-	location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml|mp3|flv)$ {
-	access_log        off;
-    	log_not_found     off;
-        expires max;
-        
-    
-	}
-	location ~ \.php$ {
-	fastcgi_split_path_info ^(.+\.php)(/.+)$;
-	fastcgi_pass 127.0.0.1:9000;
-	fastcgi_index index.php;
-	include fastcgi_params;
-	fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-	#fastcgi_cache_methods GET POST;
-	#fastcgi_cache MYAPP;
-        #fastcgi_cache_valid 200 3d;
-	#fastcgi_cache_valid 302 3d;
-	#fastcgi_cache_use_stale error timeout invalid_header updating http_500 http_404 off;
-	add_header X-Cache \$upstream_cache_status;
-	add_header Set-Cookie "cip=\$remote_addr;chost=\$Host;Path=/;Max-Age=315360000";
-	}
+	server_name _;
 
+	gzip on;
+    	gzip_vary on;
+    	gzip_disable "msie6";
+    	gzip_comp_level 6;
+    	gzip_min_length 1100;
+    	gzip_buffers 16 8k;
+    	gzip_proxied any;
+    	gzip_types
+        text/plain
+        text/css
+        text/js
+        text/xml
+        text/javascript
+        application/javascript
+        application/x-javascript
+        application/json
+        application/xml
+        application/xml+rss;
+	
+	
+location / {
+        try_files \$uri \$uri/ /index.php?\$args;
 
+    }
+    
+location ~ \.php\$ {
+        try_files \$uri /index.php =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)\$;
+        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    
+location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc|svg|woff|woff2|ttf)\$ {
+      expires 1M;
+      access_log off;
+      add_header Cache-Control "public";
+    }
+location ~* \.(?:css|js)\$ {
+      expires 7d;
+      access_log off;
+      add_header Cache-Control "public";
+    }
+location ~ /\.ht {
+        deny  all;
+    }
+    
 }
 EOF
 
