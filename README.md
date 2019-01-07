@@ -139,8 +139,15 @@ wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blo
 #ee ioncube php 5.6
 
 
-wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ee_ioncube && chmod +x ee_ioncube && ./ee_ioncube
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ioncube7.2 && chmod +x ioncube7.2 && ./ioncube7.2
 
+
+
+
+#ee ioncube php 7.2
+
+
+wget --no-check-certificate https://raw.githubusercontent.com/arsanto/ubuntu-blog-install/master/ee_ioncube && chmod +x ee_ioncube && ./ee_ioncube
 
 
 
