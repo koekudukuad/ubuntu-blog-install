@@ -1,0 +1,55 @@
+#!/bin/bash
+
+
+
+#update everything
+apt-get -y remove --purge -y apache2* apache* php* mysql* ubuntu-release-upgrader-core landscape-common
+apt-get update
+apt-get install software-properties-common python-software-properties -y
+sudo locale-gen en_US.UTF-8
+export LANG=en_US.UTF-8
+apt-add-repository ppa:ondrej/php -y
+apt-get update
+
+
+apt install apache2 libapache2-mod-fastcgi php7.2 php7.2-fpm htop nano zip fail2ban
+
+systemctl status php7.2-fpm
+
+a2enmod actions fastcgi alias proxy_fcgi
+
+
+cat /dev/null > /etc/apache2/sites-available/000-default.conf
+
+cat << EOF | tee -a /etc/apache2/sites-available/000-default.conf
+
+<VirtualHost *:80>
+    ServerName example.com
+    ServerAlias www.example.com
+    DocumentRoot /var/www/html
+ 
+    <Directory /var/www/html>
+        Options -Indexes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+ 
+    <FilesMatch \.php$>
+        # 2.4.10+ can proxy to unix socket
+        SetHandler "proxy:unix:/var/run/php/php7.2-fpm.sock|fcgi://localhost/"
+ 
+        # Else we can just use a tcp socket:
+        #SetHandler "proxy:fcgi://127.0.0.1:9000"
+    </FilesMatch>
+ 
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+EOF
+
+systemctl restart apache2
+
+echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+
+
