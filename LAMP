@@ -9,11 +9,9 @@ apt-get install software-properties-common python-software-properties -y
 sudo locale-gen en_US.UTF-8
 export LANG=en_US.UTF-8
 apt-add-repository ppa:ondrej/php -y
-apt-get -y install fail2ban
 apt-get update
 
-#apt-get install apache2 php5.6 php5.6-cli libapache2-mod-php5.6 php5.6-gd php5.6-mysql php5.6-mcrypt php5.6-curl unzip php5.6-sqlite nano wget -y
-apt-get -y install apache2 zip sudo htop php5.6-fpm php5.6-curl php5.6-gd php5.6-imap php5.6-mcrypt php5.6-readline php5.6-mysql php5.6-cli php5.6-common php5.6-curl php5.6-mbstring php5.6-bcmath php5.6-recode php5.6-mysql php5.6-opcache php-memcached php-imagick php-xdebug php-msgpack php5.6-zip php5.6-xml php5.6-soap php-memcache 
+apt-get install fail2ban apache2 php5.6 php5.6-cli libapache2-mod-php5.6 php5.6-gd php5.6-mysql php5.6-mcrypt php5.6-curl unzip php5.6-sqlite nano wget -y
 
 
 echo "<IfModule mod_dir.c>
