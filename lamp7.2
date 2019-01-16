@@ -50,8 +50,8 @@ EOF
 
 systemctl restart apache2
 
-echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+echo "<?php phpinfo(); ?>" > /var/www/html/index.php
 
 service apache2 restart
 
-
+rm -rf /var/www/html/index.html
