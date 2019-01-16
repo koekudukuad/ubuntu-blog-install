@@ -24,8 +24,8 @@ cat /dev/null > /etc/apache2/sites-available/000-default.conf
 cat << EOF | tee -a /etc/apache2/sites-available/000-default.conf
 
 <VirtualHost *:80>
-    ServerName example.com
-    ServerAlias www.example.com
+    #ServerName example.com
+    #ServerAlias www.example.com
     DocumentRoot /var/www/html
  
     <Directory /var/www/html>
