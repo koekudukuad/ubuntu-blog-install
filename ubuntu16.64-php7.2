@@ -13,7 +13,7 @@ apt-get update
 
 
 #install php
-apt-get -y install unzip zip nginx fail2ban php7.2 php7.2-mysql php7.2-fpm php7.2-mbstring php7.2-xml php7.2-curl htop
+apt-get -y install unzip zip nginx fail2ban php7.2 php7.2-zip php7.2-mysql php7.2-gd php7.2-gd php7.2-cli php7.2-fpm php7.2-mbstring php7.2-xml php7.2-curl htop
 
 
 #configure nginx
@@ -25,17 +25,17 @@ rm -rf /var/www/html
 
 sed -i "s/^memory_limit = 128M/memory_limit = 512M/" /etc/php/7.2/fpm/php.ini
 
-sed -i "s/^pm.max_children = 5/pm.max_children = 40/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/^pm.max_children = 5/pm.max_children = 50/" /etc/php/7.2/fpm/pool.d/www.conf
 
-sed -i "s/^pm.start_servers = 2/pm.start_servers = 10/" /etc/php/7.2/fpm/pool.d/www.conf
+#sed -i "s/^pm.start_servers = 2/pm.start_servers = 10/" /etc/php/7.2/fpm/pool.d/www.conf
 
-sed -i "s/^pm.min_spare_servers = 1/pm.min_spare_servers = 5/" /etc/php/7.2/fpm/pool.d/www.conf
+#sed -i "s/^pm.min_spare_servers = 1/pm.min_spare_servers = 5/" /etc/php/7.2/fpm/pool.d/www.conf
 
-sed -i "s/^pm.max_spare_servers = 3/pm.max_spare_servers = 10/" /etc/php/7.2/fpm/pool.d/www.conf
+#sed -i "s/^pm.max_spare_servers = 3/pm.max_spare_servers = 10/" /etc/php/7.2/fpm/pool.d/www.conf
 
-sed -i "s/^;pm.process_idle_timeout = 10s;/pm.process_idle_timeout = 30s;/" /etc/php/7.2/fpm/pool.d/www.conf
+#sed -i "s/^;pm.process_idle_timeout = 10s;/pm.process_idle_timeout = 30s;/" /etc/php/7.2/fpm/pool.d/www.conf
 
-sed -i "s/^;pm.max_requests = 500/pm.max_requests = 250/" /etc/php/7.2/fpm/pool.d/www.conf
+#sed -i "s/^;pm.max_requests = 500/pm.max_requests = 250/" /etc/php/7.2/fpm/pool.d/www.conf
 
 
 
