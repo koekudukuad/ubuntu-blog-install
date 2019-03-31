@@ -25,17 +25,17 @@ rm -rf /var/www/html
 
 sed -i "s/^memory_limit = 128M/memory_limit = 512M/" /etc/php/7.2/fpm/php.ini
 
-sed -i "s/^pm.max_children = 5/pm.max_children = 50/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/^pm.max_children = 5/pm.max_children = 100/" /etc/php/7.2/fpm/pool.d/www.conf
 
-#sed -i "s/^pm.start_servers = 2/pm.start_servers = 10/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/^pm.start_servers = 2/pm.start_servers = 20/" /etc/php/7.2/fpm/pool.d/www.conf
 
-#sed -i "s/^pm.min_spare_servers = 1/pm.min_spare_servers = 5/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/^pm.min_spare_servers = 1/pm.min_spare_servers = 10/" /etc/php/7.2/fpm/pool.d/www.conf
 
-#sed -i "s/^pm.max_spare_servers = 3/pm.max_spare_servers = 10/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/^pm.max_spare_servers = 3/pm.max_spare_servers = 30/" /etc/php/7.2/fpm/pool.d/www.conf
 
-#sed -i "s/^;pm.process_idle_timeout = 10s;/pm.process_idle_timeout = 30s;/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/^request_terminate_timeout = 0/request_terminate_timeout = 300/" /etc/php/7.2/fpm/pool.d/www.conf
 
-#sed -i "s/^;pm.max_requests = 500/pm.max_requests = 250/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/^;pm.max_requests = 500/pm.max_requests = 500/" /etc/php/7.2/fpm/pool.d/www.conf
 
 
 
