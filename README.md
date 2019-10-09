@@ -18,6 +18,12 @@ sed -i 's/prohibit-password/yes/' /etc/ssh/sshd_config
 
 /etc/init.d/ssh restart
 
+#root perlu ganti password
+
+sudo passwd root
+
+
+
 atau 
 
 Login, and edit this file: sudo nano /etc/ssh/sshd_config
