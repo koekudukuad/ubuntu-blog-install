@@ -42,6 +42,9 @@ reboot or restart sshd service using: /etc/init.d/ssh restart
 
 
 ================================================================
+
+
+
 fail2ban-client status sshd
 
 
