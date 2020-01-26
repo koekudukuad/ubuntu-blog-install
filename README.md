@@ -76,6 +76,16 @@ nano /etc/apt/sources.list
 
 cd error
 
+
+Debian 7.0.0 x86 Minimal v1 (gen 2)
+
+
+put only , hapus yang lainya
+
+
+deb http://archive.debian.org/debian wheezy main
+
+
 ============================
 
 php5 fpm easting cpu
