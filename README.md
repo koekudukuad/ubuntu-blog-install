@@ -58,7 +58,7 @@ fail2ban-client status sshd
 
 du -sh /*
 
-
+/var/www# du -sch *
 ===================================
 
 
